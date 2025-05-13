@@ -8,7 +8,7 @@ const HeroSection = () => {
       style={{ backgroundColor: "var(--background)" }}
     >
       <h1 className="text-4xl font-bold mb-4" style={{ color: "var(--primary-hover)" }}>
-        La importancia de la Tevila
+       <img src="/logo.png" alt="" srcset="" />
       </h1>
       <p className="text-lg mb-8 text-center max-w-md" style={{ color: "var(--text-primary)" }}>
         La Tevila es un proceso espiritual que permite purificar y elevar los objetos. Con nosotros, asegurás el cumplimiento de esta tradición de manera accesible y comprometida.
