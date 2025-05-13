@@ -64,9 +64,11 @@ const PaymentButton = ({ email }) => {
       </button>
 
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-teal-500"></div>
-          <p className="text-white mt-2">Redirigiendo a Mercado Pago...</p>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-teal-500 border-opacity-75"></div>
+            <p className="text-teal-600 mt-2 text-sm font-semibold">Redirigiendo a Mercado Pago...</p>
+          </div>
         </div>
       )}
     </div>
@@ -74,3 +76,4 @@ const PaymentButton = ({ email }) => {
 };
 
 export default PaymentButton;
+
