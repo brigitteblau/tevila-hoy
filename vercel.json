@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/success", "destination": "/" },
+    { "source": "/failure", "destination": "/" },
+    { "source": "/pending", "destination": "/" }
+  ]
+}
