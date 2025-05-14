@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 import PaymentButton from './PaymentButton';
+
 const TevilaForm = () => {
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
@@ -15,6 +16,7 @@ const TevilaForm = () => {
     direccionDevolucion: '',
     conociste: ''
   });
+
   const minDate = () => {
     const date = new Date();
     let daysToAdd = 4;
@@ -27,9 +29,9 @@ const TevilaForm = () => {
     return date.toISOString().split('T')[0];
   };
   
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prevData => ({ ...prevData, [name]: value }));
   };
 
   const validateStep = () => {
@@ -71,100 +73,255 @@ const TevilaForm = () => {
   };
 
   const renderError = (field) => (
-    errors[field] ? <p className="text-red-500">{errors[field]}</p> : null
+    errors[field] ? <p className="text-red-500 text-sm mt-1">{errors[field]}</p> : null
   );
 
+  const renderProgressBar = () => {
+    const totalSteps = 5;
+    const progress = (step / totalSteps) * 100;
+    
+    return (
+      <div className="mb-8 w-full">
+        <div className="flex justify-between mb-2">
+          {[...Array(totalSteps)].map((_, index) => (
+            <div 
+              key={index} 
+              className={`rounded-full w-8 h-8 flex items-center justify-center ${index + 1 <= step ? 'bg-teal-500 text-white' : 'bg-gray-300 text-gray-600'}`}
+            >
+              {index + 1}
+            </div>
+          ))}
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            className="bg-teal-500 h-2 rounded-full transition-all duration-300 ease-in-out"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      </div>
+    );
+  };
+
   const renderStep = () => {
+    const buttonClasses = "transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50";
+    const inputClasses = (fieldName) => `border rounded-lg p-3 w-full text-gray-800 transition duration-200 focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 ${errors[fieldName] ? 'border-red-500' : 'border-gray-300'}`;
+
     switch (step) {
       case 1:
         return (
-          <div>
-            <label>Nombre Completo:</label>
-            <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} className={`border p-2 mb-4 block w-full ${errors.nombre ? 'border-red-500' : ''}`} />
-            {renderError('nombre')}
+          <div className="space-y-4">
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">Nombre Completo:</label>
+              <input 
+                type="text" 
+                name="nombre" 
+                value={formData.nombre} 
+                onChange={handleChange} 
+                className={inputClasses('nombre')} 
+                placeholder="Ingresa tu nombre completo"
+              />
+              {renderError('nombre')}
+            </div>
             
-            <label>Email:</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} className={`border p-2 mb-4 block w-full ${errors.email ? 'border-red-500' : ''}`} />
-            {renderError('email')}
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">Email:</label>
+              <input 
+                type="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange} 
+                className={inputClasses('email')} 
+                placeholder="ejemplo@correo.com"
+              />
+              {renderError('email')}
+            </div>
 
-            <label>Teléfono:</label>
-            <input type="text" name="telefono" value={formData.telefono} onChange={handleChange} className={`border p-2 mb-4 block w-full ${errors.telefono ? 'border-red-500' : ''}`} />
-            {renderError('telefono')}
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">Teléfono:</label>
+              <input 
+                type="tel" 
+                name="telefono" 
+                value={formData.telefono} 
+                onChange={handleChange} 
+                className={inputClasses('telefono')} 
+                placeholder="Tu número de teléfono (8-15 dígitos)"
+              />
+              {renderError('telefono')}
+            </div>
             
-            <button onClick={nextStep} className="bg-teal-500 text-white px-4 py-2 rounded">Siguiente →</button>
+            <div className="flex justify-end mt-6">
+              <button 
+                onClick={nextStep} 
+                className={`${buttonClasses} bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg flex items-center`}
+              >
+                Siguiente <span className="ml-2">→</span>
+              </button>
+            </div>
           </div>
         );
       case 2:
         return (
-          <div>
-            <p>Para hacerle Tevila a tu vajilla, tenés que envolverla y guardarla en cajas o bolsas resistentes. Cada caja o bolsa se llamará "bulto" y deberá estar enumerada y nombrada.</p>
-            <p>Por ejemplo: si me llamo Nora y tengo <b> 5 bultos </b>, 
-              mi primera caja dirá
-              <b>"Nora 1/5"</b>  y la segunda <b>"Nora 2/5"</b> y así con todas.</p>
-            <label>¿Cuántos bultos tenés?</label>
-            <input type="number" name="bultos" value={formData.bultos} onChange={handleChange} className="border p-2 mb-4 block w-full" />
-            {renderError('bultos')}
-            <button onClick={prevStep} className="bg-gray-300 text-black px-4 py-2 rounded">← Anterior</button>
-            <button onClick={nextStep} className="bg-teal-500 text-white px-4 py-2 rounded ml-2">Siguiente →</button>
+          <div className="space-y-4">
+            <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-md mb-6">
+              <p className="text-gray-700 mb-3">Para hacerle Tevila a tu vajilla, tenés que envolverla y guardarla en cajas o bolsas resistentes. Cada caja o bolsa se llamará "bulto" y deberá estar enumerada y nombrada.</p>
+              <p className="text-gray-700">
+                Por ejemplo: si me llamo Nora y tengo <span className="font-bold">5 bultos</span>, 
+                mi primera caja dirá <span className="font-bold">"Nora 1/5"</span> y la segunda <span className="font-bold">"Nora 2/5"</span> y así con todas.
+              </p>
+            </div>
+            
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">¿Cuántos bultos tenés?</label>
+              <input 
+                type="number" 
+                min="1"
+                name="bultos" 
+                value={formData.bultos} 
+                onChange={handleChange} 
+                className={inputClasses('bultos')} 
+              />
+              {renderError('bultos')}
+            </div>
+            
+            <div className="flex justify-between mt-6">
+              <button 
+                onClick={prevStep} 
+                className={`${buttonClasses} bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg flex items-center`}
+              >
+                <span className="mr-2">←</span> Anterior
+              </button>
+              <button 
+                onClick={nextStep} 
+                className={`${buttonClasses} bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg flex items-center`}
+              >
+                Siguiente <span className="ml-2">→</span>
+              </button>
+            </div>
           </div>
         );
 
-        case 3:
-          return (
-            <div>
-              <label>¿Por dónde hay que retirar la vajilla?</label>
-              <input type="text" name="direccionRetiro" value={formData.direccionRetiro} onChange={handleChange} className="border p-2 mb-4 block w-full" />
-              {renderError('direccionRetiro')}
-              <label>¿Qué día podemos ir a buscarla? (a partir de 4 días hábiles)</label>
-              <input 
-  type="date" 
-  name="fechaRetiro" 
-  min={minDate()} 
-  value={formData.fechaRetiro} 
-  onChange={handleChange} 
-  className="border p-2 mb-4 block w-full" 
-/>
-              {renderError('fechaRetiro')}
-              <button onClick={prevStep} className="bg-gray-300 text-black px-4 py-2 rounded">← Anterior</button>
-              <button onClick={nextStep} className="bg-teal-500 text-white px-4 py-2 rounded ml-2">Siguiente →</button>
-            </div>
-          );
-          case 4:
-            return (
-              <div>
-                <label>¿Por dónde hay que devolver la vajilla?</label>
-                <input type="text" name="direccionDevolucion" value={formData.direccionRetiro} onChange={handleChange} className="border p-2 mb-4 block w-full" />
-                {renderError('direccionDevolucion')}
-                <label>¿Qué día podes estar para recibirla?</label>
-                <input 
-    type="date" 
-    name="fechaDevolucion" 
-    min={minDate()} 
-    value={formData.fechaRetiro} 
-    onChange={handleChange} 
-    className="border p-2 mb-4 block w-full" 
-  />
-                {renderError('fechaDevolucion')}
-                <button onClick={prevStep} className="bg-gray-300 text-black px-4 py-2 rounded">← Anterior</button>
-                <button onClick={nextStep} className="bg-teal-500 text-white px-4 py-2 rounded ml-2">Siguiente →</button>
-              </div>
-            );
-        default:
-     
-
+      case 3:
         return (
-          <div className="text-center">
-            <h2 className="text-xl font-bold mb-4">Perfecto, para completar le lugar necesitamos una transferencia de 15000 pesos argentinos
-              Si se quiere pueder ser devueltos o puestos en tzedaka para mejorar el proyecto. 
-            </h2>
-           <PaymentButton/>
+          <div className="space-y-4">
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">¿Por dónde hay que retirar la vajilla?</label>
+              <input 
+                type="text" 
+                name="direccionRetiro" 
+                value={formData.direccionRetiro} 
+                onChange={handleChange} 
+                className={inputClasses('direccionRetiro')} 
+                placeholder="Dirección completa para el retiro"
+              />
+              {renderError('direccionRetiro')}
+            </div>
+            
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">¿Qué día podemos ir a buscarla? (a partir de 4 días hábiles)</label>
+              <input 
+                type="date" 
+                name="fechaRetiro" 
+                min={minDate()} 
+                value={formData.fechaRetiro} 
+                onChange={handleChange} 
+                className={inputClasses('fechaRetiro')} 
+              />
+              {renderError('fechaRetiro')}
+            </div>
+            
+            <div className="flex justify-between mt-6">
+              <button 
+                onClick={prevStep} 
+                className={`${buttonClasses} bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg flex items-center`}
+              >
+                <span className="mr-2">←</span> Anterior
+              </button>
+              <button 
+                onClick={nextStep} 
+                className={`${buttonClasses} bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg flex items-center`}
+              >
+                Siguiente <span className="ml-2">→</span>
+              </button>
+            </div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="space-y-4">
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">¿Por dónde hay que devolver la vajilla?</label>
+              <input 
+                type="text" 
+                name="direccionDevolucion" 
+                value={formData.direccionDevolucion} 
+                onChange={handleChange} 
+                className={inputClasses('direccionDevolucion')} 
+                placeholder="Dirección completa para la devolución"
+              />
+              {renderError('direccionDevolucion')}
+            </div>
+            
+            <div className="form-group">
+              <label className="block text-gray-700 font-medium mb-2">¿Qué día podés estar para recibirla?</label>
+              <input 
+                type="date" 
+                name="fechaDevolucion" 
+                min={minDate()}  
+                value={formData.fechaDevolucion} 
+                onChange={handleChange} 
+                className={inputClasses('fechaDevolucion')} 
+              />
+              {renderError('fechaDevolucion')}
+            </div>
+            
+            <div className="flex justify-between mt-6">
+              <button 
+                onClick={prevStep} 
+                className={`${buttonClasses} bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg flex items-center`}
+              >
+                <span className="mr-2">←</span> Anterior
+              </button>
+              <button 
+                onClick={nextStep} 
+                className={`${buttonClasses} bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg flex items-center`}
+              >
+                Siguiente <span className="ml-2">→</span>
+              </button>
+            </div>
+          </div>
+        );
+      default:
+        return (
+          <div className="text-center space-y-6">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+              <h2 className="text-xl font-bold text-gray-800 mb-4">
+                Perfecto, para completar el proceso necesitamos una transferencia de 15000 pesos argentinos
+              </h2>
+              <p className="text-gray-700 mb-4">
+                Si se quiere, pueden ser devueltos o puestos en tzedaka para mejorar el proyecto.
+              </p>
+              <div className="mt-6">
+                <PaymentButton />
+              </div>
+            </div>
+            <button 
+              onClick={prevStep} 
+              className={`${buttonClasses} bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg flex items-center mx-auto`}
+            >
+              <span className="mr-2">←</span> Volver al paso anterior
+            </button>
           </div>
         );
     }
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white rounded-xl shadow-lg">
+      <div className="text-center mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-teal-600">Estas a unos pocos pasos de tener tu vajilla kosher</h1>
+      </div>
+      
+      {renderProgressBar()}
       {renderStep()}
     </div>
   );

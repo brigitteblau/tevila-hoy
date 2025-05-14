@@ -9,6 +9,15 @@
   --background: #f1f5f9;
   --error: #ef4444;
 
+
+   --tevila-pending-color: #FFB020; /* Amarillo para pendiente */
+  --tevila-success-color: #28A745; /* Verde para éxito */
+  --tevila-failure-color: #DC3545; /* Rojo para fallo */
+  --tevila-background-color: #f3f4f6; /* Fondo gris claro */
+  --tevila-text-color: #212529; /* Texto principal */
+  --tevila-link-color: #007bff; /* Enlaces */
+  
+
   }
  /* index.css */
 
