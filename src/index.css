@@ -1,10 +1,24 @@
 @import "tailwindcss";
 
 :root {
-    --primary: #38B2AC;
-    --primary-hover: #319795;
-    --background: #F7FAFC;
     --text-primary: #2D3748;
     --white: #FFFFFF;
+     --primary: #14b8a6;
+  --primary-hover: #0d9488;
+  --secondary: #d1fae5;
+  --background: #f1f5f9;
+  --error: #ef4444;
+
   }
-  
+ /* index.css */
+
+body {
+  @apply bg-gradient-to-b from-teal-500 to-teal-700 text-white;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

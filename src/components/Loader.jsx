@@ -17,7 +17,6 @@ const Loader = () => {
         className="w-48 h-24 mb-4 animate-bounce" 
         style={{ maxWidth: '250px', maxHeight: '125px' }}
       />
-      {/* <p>Cargando...</p> */}
     </motion.div>
   );
 };
