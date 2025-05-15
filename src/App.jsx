@@ -11,7 +11,7 @@ import Header from './components/Header';
 import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
 import StatusPage from './components/pages/Page';
-import FAQ from './components/FAQ';
+import FAQ from './FAQ';
 const Layout = ({ children }) => (
   <div>
     <Header />
