@@ -334,7 +334,7 @@ const TevilaForm = () => {
   };
 
   return (
-    <section id='form' className='m-20'>
+    <section id='form' className='m-5'>
     <div className="max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white rounded-xl shadow-lg"> 
       <div className="text-center mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-teal-600">Estas a unos pocos pasos de tener tu vajilla kosher</h1>
