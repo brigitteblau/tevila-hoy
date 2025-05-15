@@ -11,7 +11,7 @@ import Header from './components/Header';
 import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
 import StatusPage from './components/pages/Page';
-
+import FAQ from './components/FAQ';
 const Layout = ({ children }) => (
   <div>
     <Header />
@@ -66,7 +66,7 @@ const App = () => {
         <Route path="/ser-parte" element={<Layout><Join /></Layout>} />
         <Route path="/terminos-y-condiciones" element={<Layout><Terms /></Layout>} />
      <Route path="/politica-de-privacidad" element={<Layout><Privacy/></Layout>} />
-
+<Route path="/preguntas-frecuentes" element={<Layout><FAQ/></Layout>} />
       </Routes>
     </Router>
   );

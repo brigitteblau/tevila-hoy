@@ -27,6 +27,8 @@ const Footer = () => {
             <h3 className="text-base font-medium mb-2">Empresa</h3>
             <div className="space-y-1">
               <Link to="/ser-parte" className="hover:text-gray-300 transition-colors text-sm">Ser parte</Link>
+               <Link to="/preguntas-frecuentes" className="hover:text-gray-300 transition-colors text-sm">Preguntas frecuentes</Link>
+
             </div>
           </div>
         </div>
