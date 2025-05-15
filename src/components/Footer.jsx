@@ -25,7 +25,7 @@ const Footer = () => {
           
           <div className="footer-section">
             <h3 className="text-base font-medium mb-2">Empresa</h3>
-            <div className="space-y-1">
+            <div className="space-y-1 lex flex-col">
               <Link to="/ser-parte" className="hover:text-gray-300 transition-colors text-sm">Ser parte</Link>
                <Link to="/preguntas-frecuentes" className="hover:text-gray-300 transition-colors text-sm">Preguntas frecuentes</Link>
 
