@@ -59,10 +59,10 @@ const App = () => {
         />
         <Route path="/success" element={<Layout> <StatusPage status="success" /> </Layout>} />
         <Route path="/failure" element={<Layout>
-          <StatusPage status="fairlure" />
+          <StatusPage status="failure" />
         </Layout>} />
 
-        <Route path="/pending" element={<Layout> <StatusPage status="pendingnpm" /> </Layout>} />
+        <Route path="/pending" element={<Layout> <StatusPage status="pending" /> </Layout>} />
         <Route path="/ser-parte" element={<Layout><Join /></Layout>} />
         <Route path="/terminos-y-condiciones" element={<Layout><Terms /></Layout>} />
      <Route path="/politica-de-privacidad" element={<Layout><Privacy/></Layout>} />
