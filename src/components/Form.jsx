@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import '../index.css';
 import PaymentButton from './PaymentButton';
-import { div } from 'framer-motion/client';
-import '../functions';
-
+import { sendConfirmationEmail, goEvent, calcularFin } from '../functions';
 
 const TevilaForm = () => {
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -70,9 +69,25 @@ const TevilaForm = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handlePayment = () => {
-    const mpUrl = `https://www.mercadopago.com.ar/init?preference_id=your_preference_id&payer_email=${formData.email}&amount=15000&reason=Tevila&external_reference=mirrow.oficial`;
-    window.location.href = mpUrl;
+  const handlePayment = async () => {
+    setIsSubmitting(true);
+    try {
+      // Enviar email de confirmación
+      await sendConfirmationEmail(formData);
+      
+      // Crear eventos en Google Calendar para retiro y devolución
+      await goEvent(formData, 'retiro');
+      await goEvent(formData, 'devolucion');
+      
+      // Redirigir a Mercado Pago
+      const mpUrl = `https://www.mercadopago.com.ar/init?preference_id=your_preference_id&payer_email=${formData.email}&amount=15000&reason=Tevila&external_reference=mirrow.oficial`;
+      window.location.href = mpUrl;
+    } catch (error) {
+      console.error('Error al procesar la solicitud:', error);
+      alert('Hubo un error al procesar la solicitud. Por favor, intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderError = (field) => (
@@ -295,7 +310,6 @@ const TevilaForm = () => {
         );
       default:
         return (
-        
           <div className="text-center space-y-6">
             <div className="bg-green-50 border border-green-200 rounded-lg p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">
@@ -305,7 +319,7 @@ const TevilaForm = () => {
                 Si se quiere, pueden ser devueltos o puestos en tzedaka para mejorar el proyecto.
               </p>
               <div className="mt-6">
-                <PaymentButton />
+                <PaymentButton onClick={handlePayment} disabled={isSubmitting} />
               </div>
             </div>
             <button 
