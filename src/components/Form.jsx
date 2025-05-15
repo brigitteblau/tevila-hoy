@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../index.css';
 import PaymentButton from './PaymentButton';
+import { div } from 'framer-motion/client';
+import '../functions';
+
 
 const TevilaForm = () => {
   const [step, setStep] = useState(1);
@@ -292,6 +295,7 @@ const TevilaForm = () => {
         );
       default:
         return (
+        
           <div className="text-center space-y-6">
             <div className="bg-green-50 border border-green-200 rounded-lg p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">
@@ -316,7 +320,8 @@ const TevilaForm = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white rounded-xl shadow-lg">
+    <section id='form' className='m-20'>
+    <div className="max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white rounded-xl shadow-lg"> 
       <div className="text-center mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-teal-600">Estas a unos pocos pasos de tener tu vajilla kosher</h1>
       </div>
@@ -324,6 +329,7 @@ const TevilaForm = () => {
       {renderProgressBar()}
       {renderStep()}
     </div>
+    </section>
   );
 };
 
