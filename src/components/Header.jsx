@@ -14,9 +14,6 @@ const Header = () => (
         style={{ width: 150, height: 80 }}
     />
 </Link>
-
-
-        {/* Puedes agregar aquí el título o cualquier otro contenido */}
     </header>
 );
 

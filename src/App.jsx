@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from './components/Loader';
 import HeroSection from './components/HeroSection';
 import TevilaForm from './components/Form';
-import SuccessPage from './components/SuccesPage';
-import Failure from './components/Failure';
-import Pending from './components/Pending';
 import ScrollToTop from './Scroll';
 import Footer from './components/Footer';
 import Join from './components/pages/JoinUs';
@@ -13,7 +10,7 @@ import Header from './components/Header';
 //no creadas las rutas
 import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
-
+import StatusPage from './components/pages/Page';
 
 const Layout = ({ children }) => (
   <div>
@@ -60,9 +57,12 @@ const App = () => {
             </FooterLayout>
           }
         />
-        <Route path="/success" element={<Layout><SuccessPage /></Layout>} />
-        <Route path="/failure" element={<Layout><Failure /></Layout>} />
-        <Route path="/pending" element={<Layout><Pending /></Layout>} />
+        <Route path="/success" element={<Layout> <StatusPage status="success" /> </Layout>} />
+        <Route path="/failure" element={<Layout>
+          <StatusPage status="fairlure" />
+        </Layout>} />
+
+        <Route path="/pending" element={<Layout> <StatusPage status="pendingnpm" /> </Layout>} />
         <Route path="/ser-parte" element={<Layout><Join /></Layout>} />
         <Route path="/terminos-y-condiciones" element={<Layout><Terms /></Layout>} />
      <Route path="/politica-de-privacidad" element={<Layout><Privacy/></Layout>} />
