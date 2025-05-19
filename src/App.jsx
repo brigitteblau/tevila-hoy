@@ -12,7 +12,7 @@ import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
 import StatusPage from './components/pages/Page';
 import FAQ from './FAQ';
-import Reparacion from './components/Reparacion';
+import Repa from './components/Reparacion';
 const Layout = ({ children }) => (
   <div>
     <Header />
@@ -54,7 +54,7 @@ const App = () => {
           element={
 
             <FooterLayout>
-                <Reparacion/>
+                <Repa/>
               <HeroSection />
               <TevilaForm />
             </FooterLayout>
