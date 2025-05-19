@@ -72,7 +72,7 @@ const data = [
 const colors = {
   primary: "#14b8a6", // Teal primario
   secondary: "#0d9488", // Teal oscuro/hover
-  accent: "#2D3748", // Texto primario (gris oscuro)
+  accent: "00000", // Texto primario (gris oscuro)
   light: "#e6fffa", // Teal muy claro
   dark: "#0f766e", // Teal más oscuro
   background: "#FFFFFF", // Fondo blanco
