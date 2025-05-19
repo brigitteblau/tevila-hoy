@@ -69,26 +69,31 @@ const TevilaForm = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handlePayment = async () => {
+const handlePayment = async () => {
     setIsSubmitting(true);
     try {
-      // Enviar email de confirmación
-      await sendConfirmationEmail(formData);
-      
-      // Crear eventos en Google Calendar para retiro y devolución
-      await goEvent(formData, 'retiro');
-      await goEvent(formData, 'devolucion');
-      
-      // Redirigir a Mercado Pago
-      const mpUrl = `https://www.mercadopago.com.ar/init?preference_id=your_preference_id&payer_email=${formData.email}&amount=15000&reason=Tevila&external_reference=mirrow.oficial`;
-      window.location.href = mpUrl;
+        console.log("Enviando correo de confirmación...");
+        await sendConfirmationEmail(formData);
+        console.log("Correo enviado correctamente.");
+        
+        console.log("Creando evento de retiro...");
+        await goEvent(formData, 'retiro');
+        console.log("Evento de retiro creado correctamente.");
+        
+        console.log("Creando evento de devolución...");
+        await goEvent(formData, 'devolucion');
+        console.log("Evento de devolución creado correctamente.");
+        
+        const mpUrl = `https://www.mercadopago.com.ar/init?preference_id=your_preference_id&payer_email=${formData.email}&amount=15000&reason=Tevila&external_reference=mirrow.oficial`;
+        window.location.href = mpUrl;
     } catch (error) {
-      console.error('Error al procesar la solicitud:', error);
-      alert('Hubo un error al procesar la solicitud. Por favor, intenta nuevamente.');
+        console.error('Error al procesar la solicitud:', error);
+        alert('Hubo un error al procesar la solicitud. Por favor, intenta nuevamente.');
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
+};
+
 
   const renderError = (field) => (
     errors[field] ? <p className="text-red-500 text-sm mt-1">{errors[field]}</p> : null

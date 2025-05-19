@@ -1,16 +1,42 @@
 import emailjs from 'emailjs-com';
 
-emailjs.init('ry0ptOJWBtnRMfPbF');
+emailjs.init('ry0ptOJWBbnRMfPbF');
 
 export const sendConfirmationEmail = (formData) => {
-  return emailjs.send('service_f82b2ev', 'template_c46c3k9', formData, 'ry0ptOJWBbnRMfPbF')
-    .then(() => {
-      console.log('Email enviado correctamente');
+  // Mapeo de los datos según los campos del template
+  const templateParams = {
+    name: formData.nombre,
+    email: formData.email,
+    phone: formData.telefono,
+    contactPreference: formData.conociste,
+    question: "Solicitud de Tevila",
+    pickupVajilla: formData.direccionRetiro ? "Sí" : "No",
+    message: `
+      **Datos de contacto:**  
+      - Nombre: ${formData.nombre}  
+      - Email: ${formData.email}  
+      - Teléfono: ${formData.telefono}  
+
+      **Datos de la solicitud:**  
+      - Retiro por: ${formData.direccionRetiro}  
+      - Fecha de Retiro: ${formData.fechaRetiro}  
+      - Devolución en: ${formData.direccionDevolucion}  
+      - Fecha de Devolución: ${formData.fechaDevolucion}  
+      - Cantidad de Bultos: ${formData.bultos}
+    `
+  };
+
+  // Envío del email
+  return emailjs.send('service_f82b2ev', 'template_c46c3k9', templateParams, 'ry0ptOJWBbnRMfPbF')
+    .then((response) => {
+      console.log('Email enviado correctamente:', response);
     })
     .catch((error) => {
       console.error('Error al enviar el correo:', error);
+      alert('No se pudo enviar el correo. Por favor, intenta de nuevo.');
     });
 };
+
 
 export const goEvent = async (formData, tipo) => {
   const titulo = tipo === 'retiro' ? 'Retiro de vajilla' : 'Devolución de vajilla';
