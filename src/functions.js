@@ -11,19 +11,11 @@ export const sendConfirmationEmail = (formData) => {
     contactPreference: formData.conociste,
     question: "Solicitud de Tevila",
     pickupVajilla: formData.direccionRetiro ? "Sí" : "No",
-    message: `
-      **Datos de contacto:**  
-      - Nombre: ${formData.nombre}  
-      - Email: ${formData.email}  
-      - Teléfono: ${formData.telefono}  
-
-      **Datos de la solicitud:**  
-      - Retiro por: ${formData.direccionRetiro}  
-      - Fecha de Retiro: ${formData.fechaRetiro}  
-      - Devolución en: ${formData.direccionDevolucion}  
-      - Fecha de Devolución: ${formData.fechaDevolucion}  
-      - Cantidad de Bultos: ${formData.bultos}
-    `
+    message: `Retiro en: ${formData.direccionRetiro}, Fecha: ${formData.fechaRetiro}. 
+    Devolución en: ${formData.direccionDevolucion}, Fecha: ${formData.fechaDevolucion}. 
+    Cantidad de bultos: ${formData.bultos}`,
+    from_name: formData.nombre,
+    reply_to: formData.email
   };
 
   // Envío del email
