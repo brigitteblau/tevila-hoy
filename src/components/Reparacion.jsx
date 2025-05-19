@@ -10,9 +10,10 @@ const Repa = () => {
   return (
     isOpen && (
       <div
-        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
+        className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
         onClick={closeModal}
       >
+      
         <div
           className="bg-white p-8 w-11/12 max-w-2xl text-center shadow-lg relative"
           onClick={(e) => e.stopPropagation()}
