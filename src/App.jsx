@@ -54,7 +54,7 @@ const App = () => {
           element={
 
             <FooterLayout>
-                <Repa/>
+                {/* <Repa/> */}
               <HeroSection />
               <TevilaForm />
             </FooterLayout>
