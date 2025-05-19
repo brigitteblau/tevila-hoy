@@ -12,6 +12,7 @@ import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
 import StatusPage from './components/pages/Page';
 import FAQ from './FAQ';
+import Reparacion from './components/Reparacion';
 const Layout = ({ children }) => (
   <div>
     <Header />
@@ -51,7 +52,9 @@ const App = () => {
         <Route
           path="/"
           element={
+
             <FooterLayout>
+                <Reparacion/>
               <HeroSection />
               <TevilaForm />
             </FooterLayout>
