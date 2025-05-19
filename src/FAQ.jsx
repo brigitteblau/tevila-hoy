@@ -70,14 +70,15 @@ const data = [
 
 // Colores personalizados basados en tu esquema
 const colors = {
-  primary: "#14b8a6", // Teal primario
-  secondary: "#0d9488", // Teal oscuro/hover
-  accent: "00000", // Texto primario (gris oscuro)
-  light: "#e6fffa", // Teal muy claro
-  dark: "#0f766e", // Teal más oscuro
-  background: "#FFFFFF", // Fondo blanco
-  text: "#2D3748" // Texto casi negro
+  primary: "#14b8a6",
+  secondary: "#0d9488",
+  accent: "#2D3748", // Este era #00000, lo cambié por un gris oscuro
+  light: "#e6fffa",
+  dark: "#0f766e",
+  background: "#FFFFFF",
+  text: "#2D3748"
 };
+
 
 const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -159,19 +160,21 @@ const FAQ = () => {
                     onClick={() => toggleQuestion(activeCategory, questionIndex)}
                     style={{ backgroundColor: isQuestionOpen(activeCategory, questionIndex) ? colors.light : 'white' }}
                   >
-                    <span className="font-medium" style={{ color: colors.accent }}>
-                      {item.pregunta}
-                    </span>
+                    <span className="font-medium" style={{ color: colors.text }}>
+  {item.pregunta}
+</span>
+
                     <span className="text-xl" style={{ color: colors.primary }}>
                       {isQuestionOpen(activeCategory, questionIndex) ? '−' : '+'}
                     </span>
                   </button>
                   
-                  {isQuestionOpen(activeCategory, questionIndex) && (
-                    <div className="p-4 bg-white border-t" style={{ borderColor: colors.light }}>
-                      <p className="whitespace-pre-line">{item.respuesta}</p>
-                    </div>
-                  )}
+             {isQuestionOpen(activeCategory, questionIndex) && (
+  <div className="p-4 bg-white border-t" style={{ borderColor: colors.light }}>
+    <p className="whitespace-pre-line" style={{ color: colors.text }}>{item.respuesta}</p>
+  </div>
+)}
+
                 </div>
               ))}
             </div>
