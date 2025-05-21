@@ -29,10 +29,14 @@ export const sendConfirmationEmail = (formData) => {
     });
 };
 
+function doGet(e) {
+  return ContentService.createTextOutput("Este script está activo y esperando peticiones POST.");
+}
+
 
 export const goEvent = async (formData, tipo) => {
   const isRetiro = tipo === 'retiro';
-
+doGet()
   const data = {
     tipo, // 'retiro' o 'devolucion'
     nombre: formData.nombre,
