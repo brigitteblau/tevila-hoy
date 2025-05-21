@@ -19,7 +19,7 @@ const PaymentButton = ({ email }) => {
             {
               title: 'Tevila - Servicio',
               quantity: 1,
-              unit_price: 1
+              unit_price: 1500
             }
           ],
           payer: {
