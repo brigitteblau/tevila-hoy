@@ -70,7 +70,7 @@ const App = () => {
         <Route path="/terminos-y-condiciones" element={<Layout><Terms /></Layout>} />
      <Route path="/politica-de-privacidad" element={<Layout><Privacy/></Layout>} />
 <Route path="/preguntas-frecuentes" element={<Layout><FAQ/></Layout>} />
- <Route path="*" element={<h1>Pagina no encontrada, busca tevilait.com</h1> />
+ <Route path="*" element={<h1>Pagina no encontrada, buscá tevilait.com</h1>} />
       </Routes>
     </Router>
   );
