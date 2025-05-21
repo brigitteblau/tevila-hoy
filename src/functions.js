@@ -44,7 +44,7 @@ export const goEvent = async (formData, tipo) => {
     fin: calcularFin(isRetiro ? formData.fechaRetiro : formData.fechaDevolucion),
   };
 
-  await fetch('https://script.google.com/macros/s/AKfycbzp2A25uVKPJgIga1A9r9kw10mmz_anAEUfR5Zpl0w8vmOk5ezoNQvGthtpQFavnyt5/exec', {
+  await fetch('https://script.google.com/macros/s/AKfycbylJQC46jHDm8efme2SpT-2EMtH7d5QIm9d3KiF3ExzLD-r_h6uq_36lGjqH1x_cT09ow/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: {
