@@ -70,6 +70,7 @@ const App = () => {
         <Route path="/terminos-y-condiciones" element={<Layout><Terms /></Layout>} />
      <Route path="/politica-de-privacidad" element={<Layout><Privacy/></Layout>} />
 <Route path="/preguntas-frecuentes" element={<Layout><FAQ/></Layout>} />
+ <Route path="*" element={<Layout><h1>Pagina no encontrada</h1></Layout>} />
       </Routes>
     </Router>
   );
