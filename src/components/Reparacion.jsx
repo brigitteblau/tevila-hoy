@@ -25,7 +25,7 @@ const Repa = () => {
             <p className="font-bold">Estamos trabajando en mejoras :)</p>
             <p>Seguimos haciendo tevila solo escribinos por whatsapp</p>
             <a
-              href="https://wa.me/+5491123456789?text=Hola,%20tengo%20una%20consulta%20sobre%20Tevila%20It"
+              href="https://wa.me/+5491165958082?text=Hola,%20tengo%20una%20consulta%20sobre%20Tevila%20It"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-2 rounded-lg text-teal-700 font-medium transition-all hover:shadow-lg bg-white hover:bg-gray-100 mt-4"
