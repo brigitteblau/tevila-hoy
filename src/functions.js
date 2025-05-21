@@ -31,28 +31,32 @@ export const sendConfirmationEmail = (formData) => {
 
 
 export const goEvent = async (formData, tipo) => {
-  const titulo = tipo === 'retiro' ? 'Retiro de vajilla' : 'Devolución de vajilla';
-  const direccion = tipo === 'retiro' ? formData.direccionRetiro : formData.direccionDevolucion;
-  const fecha = tipo === 'retiro' ? formData.fechaRetiro : formData.fechaDevolucion;
+  const isRetiro = tipo === 'retiro';
 
-  await fetch('hhttps://script.google.com/macros/s/AKfycbxn6BJDmj-dLNa2Nw8vXQvGBvn3j_uZoLVT8aX2LrJ3wLLK5vZNzeHyQYRaEHGjaMGm/exec', {
+  const data = {
+    tipo, // 'retiro' o 'devolucion'
+    nombre: formData.nombre,
+    email: formData.email,
+    telefono: formData.telefono,
+    direccion: isRetiro ? formData.direccionRetiro : formData.direccionDevolucion,
+    fecha: isRetiro ? formData.fechaRetiro : formData.fechaDevolucion,
+    fin: calcularFin(isRetiro ? formData.fechaRetiro : formData.fechaDevolucion),
+  };
+
+  await fetch('https://script.google.com/macros/s/AKfycbzp2A25uVKPJgIga1A9r9kw10mmz_anAEUfR5Zpl0w8vmOk5ezoNQvGthtpQFavnyt5/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      titulo: `${titulo} – ${formData.nombre}`,
-      descripcion: `Tel: ${formData.telefono} - Email: ${formData.email} - Dirección: ${direccion}`,
-      inicio: fecha,
-      fin: calcularFin(fecha)
-    })
+    body: JSON.stringify(data)
   }).then(() => {
-    console.log(`Evento creado en Google Calendar: ${titulo}`);
+    console.log(`Evento ${tipo} creado`);
   }).catch(error => {
-    console.error('Error al crear el evento:', error);
+    console.error(`Error al crear evento ${tipo}:`, error);
   });
 };
+
 
 export const calcularFin = (fechaInicio) => {
   const date = new Date(fechaInicio);
