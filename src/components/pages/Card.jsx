@@ -17,7 +17,7 @@ const Card = () => {
     },
     {
       title: "Guía y confianza",
-      text: "Seguimos las halajot del Rab Ovadia Yosef con el respaldo completo del equipo de Menorá. Aprendé con tranquilidad.",
+      text: "Seguimos las halajot del Rab Ovadia Yosef con el respaldo completo del equipo de []. Aprendé con tranquilidad.",
       image: "/faq/halaja.jpg",
       icon: "🤝"
     },

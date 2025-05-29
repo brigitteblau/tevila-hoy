@@ -17,7 +17,7 @@
 body {
   /* @apply bg-gradient-to-b from-teal-500 to-teal-700 text-white; */
   min-height: 100vh;
-  margin: 0;
+  margin: 2%;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
