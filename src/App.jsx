@@ -8,11 +8,13 @@ import Footer from './components/Footer';
 import Join from './components/pages/JoinUs';
 import Header from './components/Header';
 //no creadas las rutas
+
 import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
 import StatusPage from './components/pages/Page';
 import FAQ from './FAQ';
 import Repa from './components/Reparacion';
+import Card from "./components/pages/Card"
 const Layout = ({ children }) => (
   <div>
     <Header />
@@ -56,7 +58,9 @@ const App = () => {
             <FooterLayout>
                 {/* <Repa/> */}
               <HeroSection />
+            <Card/>
               <TevilaForm />
+<Join/>
             </FooterLayout>
           }
         />
